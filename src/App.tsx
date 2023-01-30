@@ -1,5 +1,7 @@
+import { Header } from "./components";
+
 function App() {
-  return <div>Testee</div>;
+  return <Header />;
 }
 
 export default App;

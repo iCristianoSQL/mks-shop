@@ -13,6 +13,7 @@
     "@types/react-dom": "^18.0.0",
     "@types/react-modal": "^3.13.1",
     "@types/react-query": "^1.2.9",
+    "@types/styled-components": "^5.1.26",
     "axios": "^1.2.6",
     "framer-motion": "^8.5.4",
     "polished": "^4.2.2",
