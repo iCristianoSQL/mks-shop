@@ -11,10 +11,10 @@ export const Button = styled.button<IStyledButton>`
     
     ${({ background, height, width, color, margin, borderRadius}) =>
         css`
-            background: ${background ?? 'transparent'};
+            background: ${background ?? `${colors.secondary[0]}`};
             height: ${height ?? '35px'};
             width: ${width ?? '100%'};
-            color: ${color ?? colors.secondary[0]};
+            color: ${color ?? colors.primary[0]};
             margin-top: ${margin ?? '0px'};
             border-radius: ${borderRadius ?? '0'};
         `

@@ -9,7 +9,6 @@ export const Container = styled.div`
     background: ${colors.primary[0]};
 
     section {
-        background: green;
         margin: auto;
         width: 70rem;
         height: fit-content;

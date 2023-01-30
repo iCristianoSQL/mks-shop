@@ -1,7 +1,13 @@
-import { Header } from "./components";
+import NavigationRoutes from "./routes";
+import { GlobalStyle } from "./styles/global";
 
 function App() {
-  return <Header />;
+  return (
+    <>
+      <GlobalStyle />
+      <NavigationRoutes />
+    </>
+  );
 }
 
 export default App;
