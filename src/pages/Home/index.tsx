@@ -1,7 +1,22 @@
+import { Card } from "../../components";
 import withLayout from "../../hocs";
+import { Container } from "./styles";
 
 const Home = () => {
-  return <div style={{ height: "100%" }}>Allllou</div>;
+  return (
+    <Container>
+      <section>
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+      </section>
+    </Container>
+  );
 };
 
 export default withLayout(Home);
