@@ -81,14 +81,14 @@ export const GlobalStyle = createGlobalStyle`
 
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-end;
     }
 
     .react-modal-content {
-        width: 100%;
-        max-width: 660px;
+        width: 30%;
+        height: 100%;
         background: ${colors.secondary[0]};
-        padding: 1.8rem;
+        padding: 1rem;
         position: relative;
         border-radius: 0.25rem;
         outline: none;

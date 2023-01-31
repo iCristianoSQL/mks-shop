@@ -1,37 +1,35 @@
-import { useQuery } from "react-query";
-import { getMakertInfos } from "../../services/mksService";
 import { Button } from "../Button";
 import { BsBagCheck } from "react-icons/bs";
 import * as S from "./styles";
 import { truncateText } from "../../utils/formats";
+import { ICard } from "./types";
 
-export const Card = () => {
-  const {
-    data: marketData,
-    isLoading,
-    isError,
-  } = useQuery("market-api", async () => {
-    try {
-      const response = await getMakertInfos();
-      return response;
-    } catch (error) {
-      console.log(error);
-    }
-  });
+interface IArr {
+  photo: string;
+  name: string;
+  price: string;
+  description: string;
+}
+
+export const Card = ({ photo, name, price, description }: ICard) => {
+  let arrTest: any = [];
+
+  const handleTesting = () => {
+    arrTest.push({ photo, name, price, description });
+    console.log("aqui", arrTest);
+  };
 
   return (
     <S.Container>
       <div className="image-box">
-        <img src={marketData?.products?.[1].photo} alt="" />
+        <img src={photo} alt={"Imagem do produto"} />
       </div>
       <div className="infos">
-        <p>{marketData?.products?.[1].name}</p>
-        <span>R${marketData?.products?.[0].price}</span>
+        <p>{name}</p>
+        <span>R${price}</span>
       </div>
-      <span>
-        {truncateText(String(marketData?.products?.[1].description), 105)}
-      </span>
-      <Button>
+      <span>{truncateText(String(description), 100)}</span>
+      <Button onClick={() => handleTesting()}>
         <BsBagCheck />
         Comprar
       </Button>

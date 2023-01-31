@@ -2,12 +2,13 @@ import styled from "styled-components";
 import { colors } from "../../utils/colors";
 
 export const Container = styled.div`
-    height: 17rem;
-    width: 13rem;
+    height: 19rem;
+    width: 13.5rem;
     border-radius: 8px;
     background: ${colors.primary[0]};
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     border-radius: 10px;
+    margin-top: 5px;
 
     display: flex;
     flex-direction: column;
@@ -35,12 +36,14 @@ export const Container = styled.div`
 
     .infos {
         display: flex;
-        padding: 0 8px;
+        padding: 0 6px;
         margin-top: 4px;
         justify-content: space-between;
+        align-items: center;
+        gap: 2px;
 
         p {
-            font-weight: 400;
+            font-weight: 600;
             font-size: 0.8rem;
             line-height: 19px;
             color: ${colors.texts[0]};
@@ -63,8 +66,8 @@ export const Container = styled.div`
         span {
             color: ${colors.texts[0]};
             padding: 0 8px;
-            font-weight: 300;
-            font-size: 10px;
+            font-weight: 500;
+            font-size: 0.6rem;
             line-height: 12px;
             margin: 8px 0;
         }

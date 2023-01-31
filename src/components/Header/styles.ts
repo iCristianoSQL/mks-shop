@@ -10,7 +10,7 @@ export const Header = styled.header`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 140px;
+    margin-bottom: 90px;
 `
 
 export const LogoBox = styled.div`

@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { QueryClientProvider } from "react-query";
 import { queryClient } from "./services/queryClient";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 import App from "./App";
 
 const root = ReactDOM.createRoot(
@@ -9,8 +11,10 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <App />
-    </QueryClientProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
+    </Provider>
   </React.StrictMode>
 );
