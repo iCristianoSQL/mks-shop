@@ -1,23 +1,34 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit"
 
-interface State {
-    userName: string;
+interface ICartItem {
+  id: number;
+  photo: string;
+  name: string;
+  price: string;
+  quantity?: number;
 }
 
-const initialState: State = {
-    userName: '',
+export interface ICartState {
+  items: ICartItem[];
+}
+
+const initialState: ICartState = {
+  items: [],
 };
 
 export const useCart = createSlice({
-    name: 'user',
+    name: "cart",
     initialState: initialState,
     reducers: {
-      changeUser: (state: State, action: PayloadAction<string>) => {
-        state.userName = action.payload;
+      addItem: (state, action: PayloadAction<ICartItem>) => {
+        state.items = [...state.items, action.payload];
+        },
+      removeItem: (state, action: PayloadAction<number>) => {
+        state.items = state.items.filter((item) => item.id !== action.payload);
       },
     },
   })
 
-  export const {changeUser} = useCart.actions
+  export const {addItem, removeItem} = useCart.actions
 
   export default useCart.reducer

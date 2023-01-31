@@ -1,14 +1,16 @@
 import { createSelector } from 'reselect';
 
 interface State {
-    user: {
-      userName: string;
+    cart: {
+      items: Array<{ id: string; name: string; price: number }>;
     };
+}
+
+const cartItems = (state: State) => state.cart.items;
+
+export const cartTotal = createSelector(
+  cartItems,
+  (items: Array<{ id: string; name: string; price: number }>) => {
+    return items.reduce((acc, item) => acc + item.price, 0);
   }
-
-const userName = (state: State) => state.user.userName;
-
-export const userLogged = createSelector(
-    userName,
-    (userName:string) => userName
 );

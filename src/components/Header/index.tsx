@@ -4,6 +4,8 @@ import { CartModal } from "../../components";
 import * as S from "./styles";
 
 import { BsCartFill } from "react-icons/bs";
+import { store } from "../../redux/store";
+import { useSelector } from "react-redux/es/exports";
 
 export const Header = () => {
   const [open, setOpen] = useState(false);
@@ -11,6 +13,8 @@ export const Header = () => {
   const handleModal = useCallback((value: boolean) => {
     setOpen(value);
   }, []);
+
+  const cartCount = useSelector((state: any) => state.cart.items.length);
 
   return (
     <S.Header>
@@ -20,7 +24,7 @@ export const Header = () => {
       </S.LogoBox>
       <S.Navigation>
         <BsCartFill onClick={() => handleModal(true)} />
-        <span>0</span>
+        <span>{cartCount}</span>
       </S.Navigation>
       <CartModal isOpen={open} onRequestClose={() => handleModal(false)} />
     </S.Header>

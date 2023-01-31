@@ -1,22 +1,23 @@
 import { Button } from "../Button";
 import { BsBagCheck } from "react-icons/bs";
-import * as S from "./styles";
 import { truncateText } from "../../utils/formats";
 import { ICard } from "./types";
 
-interface IArr {
-  photo: string;
-  name: string;
-  price: string;
-  description: string;
-}
+import { useDispatch } from "react-redux";
+import { addItem } from "../../redux/useCart/actions";
+import * as S from "./styles";
 
-export const Card = ({ photo, name, price, description }: ICard) => {
-  let arrTest: any = [];
+export const Card = ({ photo, name, price, description, id }: ICard) => {
+  const dispatch = useDispatch();
 
   const handleTesting = () => {
-    arrTest.push({ photo, name, price, description });
-    console.log("aqui", arrTest);
+    const obj = {
+      id: id ?? 0,
+      photo,
+      name,
+      price,
+    };
+    dispatch(addItem(obj));
   };
 
   return (

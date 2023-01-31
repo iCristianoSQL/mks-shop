@@ -15,9 +15,6 @@ const Home = () => {
     }
   });
 
-  const handleTratament = () => {
-    console.log("oiie");
-  };
   return (
     <Container>
       <section>
@@ -25,11 +22,11 @@ const Home = () => {
           return (
             <Card
               key={event.id}
+              id={event.id}
               name={event.name}
               description={event.description}
               photo={event.photo}
               price={event.price}
-              // handlePurchase={handleTratament}
             />
           );
         })}

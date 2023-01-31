@@ -4,19 +4,20 @@ import storage from 'redux-persist/lib/storage';
 import useCart from "./useCart/reducer";
 
 const persistConfig = {
-    key: 'userName',
+    key: 'cart',
     storage,
   };
 
 const persistedReducer = persistReducer(persistConfig, useCart);
 
-
 const store = configureStore({
     reducer: {
-        user: persistedReducer,
+        cart: persistedReducer,
     }
 })
 
 const persistor = persistStore(store);
 
 export {store, persistor}
+
+
