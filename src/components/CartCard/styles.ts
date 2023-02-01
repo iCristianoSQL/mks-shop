@@ -38,9 +38,23 @@ export const Container = styled.div`
     }
 
     div {
-        height: 40px;
-        width: 50px;
-        background: black;
+        height: 30px;
+        width: 65px;
+        background: transparent;
+        border: 0.5px solid ${colors.alternative["0.1"]};
+        border-radius: 10px;
+        margin-right: 0.3rem;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+
+        font-size: 1rem;
+
+        b {
+            cursor: pointer;
+        }
     }
 
     span {

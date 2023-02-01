@@ -7,12 +7,20 @@ import { useDispatch } from "react-redux";
 import { addItem } from "../../redux/useCart/actions";
 import * as S from "./styles";
 
-export const Card = ({ photo, name, price, description, id }: ICard) => {
+export const Card = ({
+  photo,
+  name,
+  price,
+  description,
+  id,
+  quantity,
+}: ICard) => {
   const dispatch = useDispatch();
 
   const handleTesting = () => {
     const obj = {
       id: id ?? 0,
+      quantity: quantity ?? 0,
       photo,
       name,
       price,

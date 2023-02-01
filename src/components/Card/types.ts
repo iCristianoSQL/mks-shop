@@ -3,5 +3,6 @@ export interface ICard {
     photo: string;
     name: string;
     price: string;
+    quantity?: number;
     description: string;
 }
