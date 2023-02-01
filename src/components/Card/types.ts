@@ -5,4 +5,5 @@ export interface ICard {
     price: string;
     quantity?: number;
     description: string;
+    originalPrice: string;
 }

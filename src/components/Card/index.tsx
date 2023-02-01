@@ -14,6 +14,7 @@ export const Card = ({
   description,
   id,
   quantity,
+  originalPrice,
 }: ICard) => {
   const dispatch = useDispatch();
 
@@ -24,6 +25,7 @@ export const Card = ({
       photo,
       name,
       price,
+      originalPrice: originalPrice ?? 0,
     };
     dispatch(addItem(obj));
   };

@@ -4,6 +4,7 @@ interface ICartItem {
   id: number;
   photo: string;
   name: string;
+  originalPrice: string;
   price: string;
   quantity: number;
 }
@@ -46,12 +47,13 @@ export const cartSlice = createSlice({
     
       if (existingItemIndex >= 0) {
         const item = state.items[existingItemIndex];
+        const originalPrice = parseFloat(item.originalPrice);
         if (action.payload.type === "increase") {
           item.quantity++;
-            state.items[existingItemIndex].price = (parseFloat(state.items[existingItemIndex].price) + parseFloat(action.payload.price)).toString();
+          state.items[existingItemIndex].price = (originalPrice * item.quantity).toString();
         } else {
           item.quantity--;
-            state.items[existingItemIndex].price = (parseFloat(state.items[existingItemIndex].price) - parseFloat(action.payload.price)).toString();
+          state.items[existingItemIndex].price = (originalPrice * item.quantity).toString();
         }
       }
     },

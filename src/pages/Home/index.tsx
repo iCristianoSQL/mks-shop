@@ -21,12 +21,13 @@ const Home = () => {
         {marketData?.products?.map((event) => {
           return (
             <Card
-              key={event.id}
-              id={event.id}
-              name={event.name}
-              description={event.description}
-              photo={event.photo}
-              price={event.price}
+            key={event.id}
+            id={event.id}
+            name={event.name}
+            description={event.description}
+            photo={event.photo}
+            originalPrice={event.price}
+            price={event.price}
             />
           );
         })}
