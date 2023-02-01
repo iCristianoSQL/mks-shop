@@ -66,6 +66,39 @@ export const GlobalStyle = createGlobalStyle`
     transition: background-color 5000s ease-in-out 0s;
   }
 
+  ::-webkit-scrollbar {
+  width: 10px;
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: ${colors.secondary[0]};
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #0069d9;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: #0062cc;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
   [disabled] {
     opacity: 0.6;
     cursor: not-allowed;
@@ -85,10 +118,9 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     .react-modal-content {
-        width: 30%;
+        width: 35%;
         height: 100%;
         background: ${colors.secondary[0]};
-        padding: 1rem;
         position: relative;
         border-radius: 0.25rem;
         outline: none;
@@ -97,8 +129,11 @@ export const GlobalStyle = createGlobalStyle`
 
 
         @media (max-width: 730px) {
-          width: 90%;
-          padding: 0.8rem;
+          width: 80%;
+        }
+
+        @media (max-width: 576px) {
+          width: 100%;
         }
     }
 

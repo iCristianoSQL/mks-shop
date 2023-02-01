@@ -52,8 +52,12 @@ export const cartSlice = createSlice({
           item.quantity++;
           state.items[existingItemIndex].price = (originalPrice * item.quantity).toString();
         } else {
-          item.quantity--;
-          state.items[existingItemIndex].price = (originalPrice * item.quantity).toString();
+          if (item.quantity == 1) {
+            item.quantity = 1
+          } else {
+            item.quantity--;
+            state.items[existingItemIndex].price = (originalPrice * item.quantity).toString();
+          }
         }
       }
     },
@@ -71,6 +75,10 @@ export const cartSlice = createSlice({
     }
   }
 });
+
+export function calculateTotal(items: ICartItem[]): number {
+  return items.reduce((total, item) => total + Number(item.price) * item.quantity, 0);
+}
 
 export const { addItem, changeItemQuantity, removeItem, cleanCart } = cartSlice.actions;
 

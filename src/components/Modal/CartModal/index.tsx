@@ -2,14 +2,17 @@ import * as S from "./styles";
 import Modal from "react-modal";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { ModalProps } from "../../../utils/@types";
-import { CartCard } from "../../index";
+import { Button, CartCard } from "../../index";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import {
   ICartState,
   removeItem,
   changeItemQuantity,
+  cleanCart,
+  calculateTotal,
 } from "../../../redux/useCart/actions";
 import { useDispatch } from "react-redux";
+import { numberFormatter } from "../../../utils/formats";
 
 export const CartModal = ({ isOpen, onRequestClose }: ModalProps) => {
   const dispatch = useDispatch();
@@ -18,17 +21,10 @@ export const CartModal = ({ isOpen, onRequestClose }: ModalProps) => {
     (state: { cart: ICartState }) => state.cart.items
   );
 
-  const handleRemoveItem = (id: number) => {
-    dispatch(removeItem(id));
-  };
-
-  const handleAddOrRemoveItem = (
-    id: number,
-    type: "increase" | "decrease",
-    price: string
-  ) => {
-    dispatch(changeItemQuantity({ id, type, price }));
-  };
+  const total = cartItems.reduce(
+    (acc, item) => acc + parseFloat(item.price),
+    0
+  );
 
   return (
     <Modal
@@ -37,38 +33,58 @@ export const CartModal = ({ isOpen, onRequestClose }: ModalProps) => {
       className="react-modal-content"
     >
       <S.Container>
-        <div className="cart-title">
-          <p>Carrinho de compras</p>
-          <AiOutlineCloseCircle onClick={() => onRequestClose()} />
+        <div className="box-of-tittle-and-contents">
+          <div className="cart-title">
+            <p>Carrinho de compras</p>
+            <AiOutlineCloseCircle onClick={() => onRequestClose()} />
+          </div>
+          <div className="cards-box">
+            {cartItems.map((event) => (
+              <CartCard
+                quantity={event.quantity}
+                key={event.id}
+                name={event.name}
+                photo={event.photo}
+                price={event.price}
+                handleRemove={() => dispatch(removeItem(event.id))}
+                handleIncrementQuantity={() =>
+                  dispatch(
+                    changeItemQuantity({
+                      id: event.id,
+                      type: "increase",
+                      price: event.price,
+                    })
+                  )
+                }
+                hadnelDecrementQuantity={() =>
+                  dispatch(
+                    changeItemQuantity({
+                      id: event.id,
+                      type: "decrease",
+                      price: event.price,
+                    })
+                  )
+                }
+              />
+            ))}
+          </div>
         </div>
-        {cartItems.map((event) => (
-          <CartCard
-            quantity={event.quantity}
-            key={event.id}
-            name={event.name}
-            photo={event.photo}
-            price={event.price}
-            handleRemove={() => handleRemoveItem(event.id)}
-            handleIncrementQuantity={() =>
-              dispatch(
-                changeItemQuantity({
-                  id: event.id,
-                  type: "increase",
-                  price: event.price,
-                })
-              )
-            }
-            hadnelDecrementQuantity={() =>
-              dispatch(
-                changeItemQuantity({
-                  id: event.id,
-                  type: "decrease",
-                  price: event.price,
-                })
-              )
-            }
-          />
-        ))}
+        <div className="cart-actions">
+          <div className="total">
+            <p>Total:</p>
+            <p>{numberFormatter.format(Number(total ?? 0))}</p>
+          </div>
+          <Button
+            onClick={() => {
+              dispatch(cleanCart());
+              setTimeout(() => {
+                onRequestClose();
+              }, 2000);
+            }}
+          >
+            Finalizar Compra
+          </Button>
+        </div>
       </S.Container>
     </Modal>
   );

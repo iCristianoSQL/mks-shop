@@ -1,5 +1,6 @@
 import { MdDeleteForever } from "react-icons/md";
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import { numberFormatter } from "../../utils/formats";
 import * as S from "./styles";
 import { ICartCard } from "./types";
 
@@ -20,10 +21,11 @@ export const CartCard = ({
       <img src={photo} alt="Produto do carrinho" />
       <p>{name}</p>
       <div>
-        <b onClick={() => handleIncrementQuantity()}>+</b>| {quantity} |
         <b onClick={() => hadnelDecrementQuantity()}>-</b>
+        {quantity}
+        <b onClick={() => handleIncrementQuantity()}>+</b>
       </div>
-      <span>R${price}</span>
+      <span>{numberFormatter.format(Number(price))}</span>
     </S.Container>
   );
 };

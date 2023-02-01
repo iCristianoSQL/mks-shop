@@ -42,7 +42,7 @@ export const Card = ({
       <span>{truncateText(String(description), 100)}</span>
       <Button onClick={() => handleTesting()}>
         <BsBagCheck />
-        Comprar
+        COMPRAR
       </Button>
     </S.Container>
   );

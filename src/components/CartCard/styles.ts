@@ -28,6 +28,10 @@ export const Container = styled.div`
 
     img {
         width: 5rem;
+
+        @media (max-width: 420px) {
+          display: none;
+        }
     }
     
     p {
@@ -49,6 +53,12 @@ export const Container = styled.div`
         align-items: center;
         justify-content: center;
         gap: 5px;
+
+        @media (max-width: 420px) {
+            justify-content: space-between;
+            gap: 0px;
+            padding: 0 5px;
+        }
 
         font-size: 1rem;
 

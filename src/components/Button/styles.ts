@@ -4,7 +4,6 @@ import { colors } from "../../utils/colors";
 import { IStyledButton } from "./types";
 
 export const Button = styled.button<IStyledButton>`
-    text-transform: uppercase;
     font-weight: 500;
     font-size: 0.8rem;
     transition: 0.5s;
