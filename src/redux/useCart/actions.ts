@@ -8,57 +8,68 @@ interface ICartItem {
   quantity: number;
 }
 
+interface IChangeItemQuantity {
+  id: number;
+  type: "increase" | "decrease";
+  price: string;
+}
+
 export interface ICartState {
   items: ICartItem[];
 }
 
 const initialState: ICartState = {
-  items: [],
+  items: []
 };
 
-export const useCart = createSlice({
+export const cartSlice = createSlice({
   name: "cart",
   initialState: initialState,
   reducers: {
     addItem: (state, action: PayloadAction<ICartItem>) => {
+      action.payload.quantity ++
       const existingItemIndex = state.items.findIndex(
         (item) => item.id === action.payload.id
       );
 
       if (existingItemIndex >= 0) {
         state.items[existingItemIndex].price = (parseFloat(state.items[existingItemIndex].price) + parseFloat(action.payload.price)).toString();
-        state.items[existingItemIndex].quantity =
-          (state.items[existingItemIndex].quantity || 0) + 1;
+        state.items[existingItemIndex].quantity += action.payload.quantity;
       } else {
-        state.items.push({ ...action.payload, quantity: 1, price: action.payload.price });
+        state.items.push(action.payload);
+      }
+    },
+    changeItemQuantity: (state, action: PayloadAction<IChangeItemQuantity>) => {
+      const existingItemIndex = state.items.findIndex(
+        (item) => item.id === action.payload.id
+      );
+    
+      if (existingItemIndex >= 0) {
+        const item = state.items[existingItemIndex];
+        if (action.payload.type === "increase") {
+          item.quantity++;
+            state.items[existingItemIndex].price = (parseFloat(state.items[existingItemIndex].price) + parseFloat(action.payload.price)).toString();
+        } else {
+          item.quantity--;
+            state.items[existingItemIndex].price = (parseFloat(state.items[existingItemIndex].price) - parseFloat(action.payload.price)).toString();
+        }
       }
     },
     removeItem: (state, action: PayloadAction<number>) => {
-      state.items = state.items.filter((item) => item.id !== action.payload);
-    },
-    incrementQuantity: (state, action: PayloadAction<number>) => {
       const existingItemIndex = state.items.findIndex(
         (item) => item.id === action.payload
       );
-    
+
       if (existingItemIndex >= 0) {
-        state.items[existingItemIndex].price = (parseFloat(state.items[existingItemIndex].price) + parseFloat(state.items[existingItemIndex].price)).toString();
-        state.items[existingItemIndex].quantity++;
+        state.items.splice(existingItemIndex, 1);
       }
     },
-    decrementQuantity: (state, action: PayloadAction<number>) => {
-      const existingItemIndex = state.items.findIndex(
-        (item) => item.id === action.payload
-      );
-    
-      if (existingItemIndex >= 0) {
-        state.items[existingItemIndex].price = (parseFloat(state.items[existingItemIndex].price) - parseFloat(state.items[existingItemIndex].price)).toString();
-        state.items[existingItemIndex].quantity--;
-      }
-    },
-  },
+    cleanCart: (state) => {
+      state.items = [];
+    }
+  }
 });
 
-export const { addItem, removeItem, incrementQuantity, decrementQuantity } = useCart.actions;
+export const { addItem, changeItemQuantity, removeItem, cleanCart } = cartSlice.actions;
 
-export default useCart.reducer;
+export default cartSlice.reducer;

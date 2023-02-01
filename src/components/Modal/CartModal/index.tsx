@@ -4,7 +4,11 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 import { ModalProps } from "../../../utils/@types";
 import { CartCard } from "../../index";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import { ICartState, removeItem, incrementQuantity, decrementQuantity } from "../../../redux/useCart/actions";
+import {
+  ICartState,
+  removeItem,
+  changeItemQuantity,
+} from "../../../redux/useCart/actions";
 import { useDispatch } from "react-redux";
 
 export const CartModal = ({ isOpen, onRequestClose }: ModalProps) => {
@@ -18,13 +22,13 @@ export const CartModal = ({ isOpen, onRequestClose }: ModalProps) => {
     dispatch(removeItem(id));
   };
 
-  const handleIncrementItem = (id: number) => {
-    dispatch(incrementQuantity(id));
-  }
-
-  const handleDecrementItem = (id: number) => {
-    dispatch(decrementQuantity(id));
-  }
+  const handleAddOrRemoveItem = (
+    id: number,
+    type: "increase" | "decrease",
+    price: string
+  ) => {
+    dispatch(changeItemQuantity({ id, type, price }));
+  };
 
   return (
     <Modal
@@ -39,14 +43,30 @@ export const CartModal = ({ isOpen, onRequestClose }: ModalProps) => {
         </div>
         {cartItems.map((event) => (
           <CartCard
-          quantity={event.quantity}
+            quantity={event.quantity}
             key={event.id}
             name={event.name}
             photo={event.photo}
             price={event.price}
             handleRemove={() => handleRemoveItem(event.id)}
-            handleIncrementQuantity={() => handleIncrementItem(event.id)}
-            hadnelDecrementQuantity={() => handleDecrementItem(event.id)}
+            handleIncrementQuantity={() =>
+              dispatch(
+                changeItemQuantity({
+                  id: event.id,
+                  type: "increase",
+                  price: event.price,
+                })
+              )
+            }
+            hadnelDecrementQuantity={() =>
+              dispatch(
+                changeItemQuantity({
+                  id: event.id,
+                  type: "decrease",
+                  price: event.price,
+                })
+              )
+            }
           />
         ))}
       </S.Container>
